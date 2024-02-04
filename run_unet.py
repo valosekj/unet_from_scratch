@@ -51,11 +51,11 @@ def train_model(model, train_loader, val_loader, epochs, criterion, optimizer):
             if i == 0:
                 fig, axes = plt.subplots(1, 3, figsize=(9, 3))
                 # Rotate the image by 90 degrees
-                axes[0].imshow(np.rot90(images[0, :, :, :].squeeze()), cmap='gray')
+                axes[0].imshow(np.rot90(images[0, :, :, :].cpu().squeeze()), cmap='gray')
                 axes[0].set_title('Image')
-                axes[1].imshow(np.rot90(outputs[0, :, :, :].detach().numpy().squeeze()), cmap='gray')
+                axes[1].imshow(np.rot90(outputs[0, :, :, :].detach().cpu().numpy().squeeze()), cmap='gray')
                 axes[1].set_title('Output')
-                axes[2].imshow(np.rot90(masks[0, :, :, :].squeeze()), cmap='gray')
+                axes[2].imshow(np.rot90(masks[0, :, :, :].cpu().squeeze()), cmap='gray')
                 axes[2].set_title('Mask')
                 plt.tight_layout()
                 # Save the image
@@ -76,6 +76,8 @@ def train_model(model, train_loader, val_loader, epochs, criterion, optimizer):
         model.eval()
         with torch.no_grad():
             for images, masks in val_loader:
+                images = images.to(device)
+                masks = masks.to(device)
                 outputs = model(images)
 
                 # Calculate the combined loss for validation data
