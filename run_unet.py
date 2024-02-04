@@ -59,8 +59,9 @@ def train_model(model, train_loader, val_loader, epochs, criterion, optimizer):
                 axes[2].set_title('Mask')
                 plt.tight_layout()
                 # Save the image
-                plt.savefig(f'images_training/output_epoch{epoch}_batch{i+1}.png', dpi=200)
-                print(f'Image saved: images_training/output_epoch{epoch}_batch{i+1}.png')
+                fname_image = f'images_training/output_epoch{epoch+1:03d}_batch{i+1:03d}.png'
+                plt.savefig(fname_image, dpi=200)
+                print(f'Image saved: {fname_image}')
 
             # Calculate the combined loss
             bce_loss = criterion(outputs, masks)
