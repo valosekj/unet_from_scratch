@@ -159,7 +159,8 @@ print(f'Length of train_loader (i.e., number of training batches): {len(train_lo
 print(f'Length of validation_loader (i.e., number of validation batches): {len(validation_loader)}')
 
 # Define a model
-model = UNet(in_channels=1, out_channels=1)
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+model = UNet(in_channels=1, out_channels=1).to(device)
 # Use the sum of the binary cross-entropy loss and the dice loss as the loss function
 criterion = nn.BCEWithLogitsLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
