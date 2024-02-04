@@ -38,6 +38,8 @@ def train_model(model, train_loader, val_loader, epochs, criterion, optimizer):
         # The number of batches = number train samples / batch_size
         # Each batch (`len(images)`) consists of 8 slices (BATCH_SIZE)
         for i, (images, masks) in enumerate(train_loader):
+            images = images.to(device)
+            labels = labels.to(device)
             # plt.imshow(images[1,:,:,:].squeeze())
             optimizer.zero_grad()
 
