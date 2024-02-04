@@ -13,6 +13,7 @@ from losses import dice_loss
 
 
 BATCHE_SIZE = 8
+NUMBER_OF_EPOCHS = 100
 
 
 def train_model(model, train_loader, val_loader, epochs, criterion, optimizer):
@@ -171,5 +172,5 @@ criterion = nn.BCEWithLogitsLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
 
 # Train the model
-train_model(model, train_loader, validation_loader, epochs=25, criterion=criterion, optimizer=optimizer)
+train_model(model, train_loader, validation_loader, epochs=NUMBER_OF_EPOCHS, criterion=criterion, optimizer=optimizer)
 
